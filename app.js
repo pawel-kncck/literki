@@ -1,47 +1,32 @@
-init();
+var words = ['KOT','DOM','LAS','MAMA','OSA','TATA','TORT','IGLO','SOK','OKO','NOS','PIES','SER','BLOK','LODY','OWCA','RYBA','BANAN','KAWA','CZEKOLADA']
+var images = ['cat.jpeg','house.png','forest.jpg','mommy.jpg','osa.jpg','daddy.jpg','tort.jpg','igloo.jpg','juice.jpg','eye.jpg','nose.jpg','dog.png','cheese.jpeg','blok.jpg','icecream.jpg','sheep.jpg','fish.jpg','banana.jpg','coffee.jpeg','chocolate.jpg']
 
-var words = ['KOT','DOM','LAS','MAMA','OSA','TATA']
-var images = ['cat.jpeg','house.png','forest.jpg','mommy.jpg','osa.jpg','daddy.jpg']
+// const inputValue = document.getElementById("main-input-area").value.toUpperCase();
 
-var mainInputArea = document.getElementById("main-input-area");
+setEventListeners();
 
-function init() {
-    
-    setEventListeners();
-    console.log('Application started');
-}
+// ON ANY TEXT INPUT IN THE MAIN TEXT AREA
 
 function onInput(event) {
-    var inputValue = document.getElementById("main-input-area").value;
-    inputValue = document.getElementById("main-input-area").value = inputValue.toUpperCase();
-    var wordsArray = inputValue.split(' ');
-    var lastMatch, lastMatchIndex;
-    for (var i = wordsArray.length; i >= 0; i--) {
-        if (words.indexOf(wordsArray[i]) !== -1) {
-            lastMatch = wordsArray[i];
-            lastMatchIndex = words.indexOf(wordsArray[i]);
-            break
-        } 
-    }
-    if (lastMatchIndex !== undefined) {
-        console.log(`Matched word: ${lastMatch}`);
-        console.log(`Matched index: ${lastMatchIndex}`);
-        console.log(`Matched index: ${typeof(lastMatchIndex)}`);
-        var currentImage = document.querySelector(".matched-image");   // Get the <ul> element with id="myList"
-        currentImage.removeChild(currentImage.childNodes[0]);
-        document.querySelector('.matched-image').insertAdjacentHTML('afterbegin',
-            `<img src="${images[lastMatchIndex]}" id="${lastMatchIndex}" alt="Image not found" width='100%'>`
-        );
+    var inputValue = $('#main-input-area').val().toUpperCase();
+    var image = $('.side-image');
+    var matchedWord, matchedIndex, matchedImageURL;
+
+    // checks if the input matches a string from words[], assigns matching image URL, shows the immage
+    if (words.indexOf(inputValue) !== -1) {
+        matchedWord = inputValue;
+        matchedImageURL = images[words.indexOf(inputValue)];
+    } else {
+        [matchedWord, matchedImageURL] = [undefined, '']
     }
     
-};
+    // changes image URL and show/hides image
+    document.getElementsByClassName('side-image')[0].setAttribute('src', matchedImageURL)
+    matchedImageURL === '' ? image.hide() : image.show();
 
+    //DEBUG:  console.log(`matchWord: ${matchedWord}, matchedIndex: ${matchedIndex}, inputValue: ${inputValue}, matchedImage: ${matchedImageURL}`)
+};
 
 function setEventListeners() {
     document.getElementById("main-input-area").addEventListener('keyup', onInput);
 };
-
-
-
-// 1. Take textarea value and split it into an array; split by space
-// 2. Create an array with strings that are words f

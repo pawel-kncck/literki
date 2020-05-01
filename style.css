@@ -7,10 +7,15 @@ h1 {
     background-color: white;
     /* position: absolute; */
     margin: auto;
-    font-size: 50px;
+    padding: 10px;
+    color: #5a2900;
+    font-size: 70px;
+    font-weight: 600;
     width: 100%;
+    text-transform: uppercase;
+    /* outline-color: #6bc092; */
 }
 
 .side-image {
-    /* object-fit: fill; */
+    width: 100%;
 }
